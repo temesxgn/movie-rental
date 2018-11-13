@@ -1,11 +1,12 @@
 package com.utdallas.movierental.price;
 
-public class NewReleasePrice extends Price {
+public class NewReleasePrice implements Price {
 
-  private static final double CHARGE_MULTIPLIER = 3;
+    private static final double CHARGE_MULTIPLIER = 3;
 
-  @Override
-  public double getChargeAmount(int daysRented) {
-    return daysRented * CHARGE_MULTIPLIER;
-  }
+    @Override
+    public double getChargeAmount(int daysRented) {
+        return daysRented * CHARGE_MULTIPLIER;
+    }
+
 }

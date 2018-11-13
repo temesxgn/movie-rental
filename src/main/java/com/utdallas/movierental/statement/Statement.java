@@ -1,20 +1,21 @@
 package com.utdallas.movierental.statement;
 
-import com.utdallas.movierental.Customer;
-import com.utdallas.movierental.Rental;
+import com.utdallas.movierental.cart.Cart;
+import com.utdallas.movierental.cart.CartDecorator;
+import com.utdallas.movierental.rental.Rental;
 
 public abstract class Statement {
 
-  protected Customer customer;
+  protected Cart cart;
 
-  public Statement(Customer customer) {
-    this.customer = customer;
+  public Statement(Cart cart) {
+    this.cart = cart;
   }
 
   public String printStatement() {
     StringBuilder builder = new StringBuilder();
     builder.append(header());
-    customer.getRentals().forEach(rental -> builder.append(detail(rental)));
+    cart.getItems().forEach(rental -> builder.append(detail(rental)));
     builder.append(footer());
     return builder.toString();
   }
