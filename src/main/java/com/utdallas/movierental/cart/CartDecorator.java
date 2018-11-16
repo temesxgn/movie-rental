@@ -13,6 +13,11 @@ public abstract class CartDecorator implements Cart {
     }
 
     @Override
+    public void addItem(Rental rental) {
+        cart.addItem(rental);
+    }
+
+    @Override
     public List<Rental> getItems() {
         return cart.getItems();
     }
@@ -23,8 +28,8 @@ public abstract class CartDecorator implements Cart {
     }
 
     @Override
-    public String getName() {
-        return cart.getName();
+    public void clear() {
+        cart.clear();
     }
 
 }

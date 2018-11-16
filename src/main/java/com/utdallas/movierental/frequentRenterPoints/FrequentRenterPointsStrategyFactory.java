@@ -4,6 +4,8 @@ import com.utdallas.movierental.cutomer.Customer;
 import com.utdallas.movierental.movie.MovieType;
 import com.utdallas.movierental.rental.Rental;
 
+import java.util.List;
+
 public final class FrequentRenterPointsStrategyFactory {
 
     private FrequentRenterPointsStrategyFactory() {
@@ -11,25 +13,28 @@ public final class FrequentRenterPointsStrategyFactory {
     }
 
     public static FrequentRenterPoints newRentalFrequentRenterPointsStrategy(MovieType type, int daysRented) {
-        switch (type) {
-            case CHILDRENS:
-                return new FrequentRenterPointsStrategyChildrensType();
-            case NEW_RELEASE:
-                return daysRented > 1 ? new FrequentRenterPointsStrategyNewReleaseTypeDoublePoints() : new FrequentRenterPointsStrategyNewReleaseTypeSinglePoints();
-            case REGULAR:
-            default:
-                return new FrequentRenterPointsStrategyRegularType(); // Return regular strategy as default
+        FrequentRenterPoints frequentRenterPoints;
+
+        if (type.equals(MovieType.CHILDRENS)) {
+            frequentRenterPoints = new FrequentRenterPointsStrategyChildrensType();
+        } else if (type.equals(MovieType.NEW_RELEASE) && daysRented > 1) {
+            frequentRenterPoints = new FrequentRenterPointsStrategyNewReleaseTypeDoublePoints();
+        } else if (type.equals(MovieType.NEW_RELEASE) && daysRented <= 1) {
+            frequentRenterPoints = new FrequentRenterPointsStrategyNewReleaseTypeSinglePoints();
+        } else {
+            frequentRenterPoints = new FrequentRenterPointsStrategyRegularType();
         }
+
+        return frequentRenterPoints;
     }
 
     // TODO is this really a factory design pattern or something else?
-    public static FrequentRenterPoints newCustomerFrequentRenterPointsStrategy(Customer customer) {
-        FrequentRenterPointsCustomerStrategy strategy = new FrequentRenterPointsCustomerStrategy();
-        boolean isFirstRentalComputation = customer.getFrequentRenterPoints() == 0;
-        if (isFirstRentalComputation) {
-            boolean isCustomerRentingMoreThanTwoTypes = customer.getRentals().stream().map(Rental::getMovieType).distinct().count() > 2;
+    public static FrequentRenterPoints newCustomerFrequentRenterPointsStrategy(Customer customer, List<Rental> rentals) {
+        FrequentRenterPointsCompositeStrategy strategy = new FrequentRenterPointsCompositeStrategy();
+        if (customer.getFrequentRenterPoints() == 0) {
+            boolean isCustomerRentingMoreThanTwoTypes = rentals.stream().map(Rental::getMovieType).distinct().count() > 2;
             boolean isWithinAgeRange = customer.getAge() >= 18 && customer.getAge() <= 22;
-            boolean isRentingAtLeastOneNewRelease = customer.getRentals().stream().anyMatch(rental -> rental.getMovieType().equals(MovieType.NEW_RELEASE));
+            boolean isRentingAtLeastOneNewRelease = rentals.stream().anyMatch(rental -> rental.getMovieType().equals(MovieType.NEW_RELEASE));
 
             if (isCustomerRentingMoreThanTwoTypes) {
                 strategy.addStrategy(new FrequentRenterPointsStrategyCustomerMoreThanTwoTypes());
@@ -39,7 +44,6 @@ public final class FrequentRenterPointsStrategyFactory {
                 strategy.addStrategy(new FrequentRenterPointsStrategyCustomerAgeRangeAndRentingNewRelease());
             }
         }
-
 
         return strategy;
     }

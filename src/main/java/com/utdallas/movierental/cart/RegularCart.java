@@ -1,7 +1,8 @@
 package com.utdallas.movierental.cart;
 
-import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.cutomer.Customer;
+import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPoints;
+import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyFactory;
 import com.utdallas.movierental.rental.Rental;
 
 import java.util.List;
@@ -9,28 +10,36 @@ import java.util.List;
 public class RegularCart implements Cart {
 
     private Customer customer;
+    private List<Rental> rentals;
 
-    public RegularCart(Customer customer) {
+    public RegularCart(Customer customer, List<Rental> rentals) {
         this.customer = customer;
+        this.rentals = rentals;
     }
 
     @Override
     public List<Rental> getItems() {
-        return customer.getRentals();
+        return rentals;
+    }
+
+    @Override
+    public void addItem(Rental rental) {
+        this.rentals.add(rental);
     }
 
     @Override
     public double getTotalChargeAmount() {
-        return customer.getTotalChargeAmount();
+        return rentals.stream().mapToDouble(Rental::getChargeAmount).sum();
     }
 
     @Override
     public int getTotalFrequentRenterPoints() {
-        return customer.getTotalFrequentRenterPoints();
+        FrequentRenterPoints customerFrequentRenterPoints = FrequentRenterPointsStrategyFactory.newCustomerFrequentRenterPointsStrategy(customer, rentals);
+        return customerFrequentRenterPoints.getPoints() + rentals.stream().mapToInt(Rental::getFrequentRenterPoints).sum();
     }
 
     @Override
-    public String getName() {
-        return customer.getName();
+    public void clear() {
+        this.rentals.clear();
     }
 }

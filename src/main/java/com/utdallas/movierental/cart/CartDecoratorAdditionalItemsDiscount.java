@@ -1,10 +1,5 @@
 package com.utdallas.movierental.cart;
 
-import com.utdallas.movierental.rental.Rental;
-
-import java.text.DecimalFormat;
-import java.util.List;
-
 public class CartDecoratorAdditionalItemsDiscount extends CartDecorator {
 
     private static final int percentage = 80;
@@ -13,9 +8,10 @@ public class CartDecoratorAdditionalItemsDiscount extends CartDecorator {
         super(cart);
     }
 
+    // TODO Fix format
     @Override
     public double getTotalChargeAmount() {
-        return Double.parseDouble(new DecimalFormat("#.00").format(cart.getTotalChargeAmount() * (percentage/100.0f)));
+        return cart.getTotalChargeAmount() * (percentage / 100.0f);
     }
 
     @Override

@@ -2,21 +2,29 @@ package com.utdallas.movierental.statement;
 
 import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.cart.CartDecorator;
+import com.utdallas.movierental.cutomer.Customer;
 import com.utdallas.movierental.rental.Rental;
+import com.utdallas.movierental.rental.RentalDecorator;
 
 public class XmlStatement extends Statement {
 
-  public XmlStatement(Cart cart) {
-    super(cart);
+  public XmlStatement(Customer customer, Cart cart) {
+    super(customer, cart);
   }
 
   @Override
   protected String detail(Rental rental) {
-    return String.format("<movie>%n\t<title>%s</title>%n\t<chargeAmount>%s</chargeAmount>%n<movie>%n", rental.getMovieTitle(), rental.getChargeAmount());
+    String detail = String.format("<movie>%n\t<title>%s</title>%n\t<chargeAmount>%s</chargeAmount>%n<movie>%n", rental.getMovieTitle(), rental.getChargeAmount());
+    if (rental instanceof RentalDecorator) {
+      String promotion = rental.toString();
+      detail = String.format("<promotion>%s</promotion>%n%s", promotion, detail);
+    }
+
+    return detail;
   }
 
   @Override
-  protected String footer() {
+  protected String footer(Customer customer, Cart cart) {
     String footer = String.format("<amountOwed>%s</amountOwed>%n<earnedFrequentRenterPoints>%s</earnedFrequentRenterPoints>%n",
             cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints());
 
@@ -29,7 +37,7 @@ public class XmlStatement extends Statement {
   }
 
   @Override
-  protected String header() {
-    return String.format("%n<name>%s</name>%n", cart.getName());
+  protected String header(Customer customer) {
+    return String.format("%n<name>%s</name>%n", customer.getName());
   }
 }

@@ -1,60 +1,21 @@
 package com.utdallas.movierental.rental;
 
-
 import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPoints;
 import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyFactory;
-import com.utdallas.movierental.price.PriceFactory;
 import com.utdallas.movierental.movie.Movie;
 import com.utdallas.movierental.movie.MovieType;
 import com.utdallas.movierental.price.Price;
+import com.utdallas.movierental.price.PriceFactory;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+public interface Rental {
 
-public class Rental implements PropertyChangeListener {
-    private Movie movie;
-    private Price price;
-    private int quantity;
-    private int daysRented;
-    private FrequentRenterPoints frequentRentalPointsStrategy;
+    int getDaysRented();
 
-    public Rental(Movie movie, int quantity, int daysRented) {
-        this.movie = movie;
-        this.movie.addPropertyChangeListener(this); //TODO maybe move this to main method?
-        this.daysRented = daysRented;
-        this.quantity = quantity;
-        this.price = PriceFactory.getPrice(movie.getMovieType());
-        this.frequentRentalPointsStrategy = FrequentRenterPointsStrategyFactory.newRentalFrequentRenterPointsStrategy(movie.getMovieType(), daysRented);
-    }
+    String getMovieTitle();
 
-    public int getDaysRented() {
-        return daysRented;
-    }
+    MovieType getMovieType();
 
-    public String getMovieTitle() {
-        return movie.getTitle();
-    }
+    double getChargeAmount();
 
-    public MovieType getMovieType() {
-        return movie.getMovieType();
-    }
-
-    public double getChargeAmount() {
-        return price.getChargeAmount(daysRented) * quantity;
-    }
-
-    public int getFrequentRenterPoints() {
-        return frequentRentalPointsStrategy.getPoints() * quantity;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        MovieType type = (MovieType)evt.getNewValue();
-        price = PriceFactory.getPrice(type);
-        frequentRentalPointsStrategy = FrequentRenterPointsStrategyFactory.newRentalFrequentRenterPointsStrategy(type, daysRented);
-    }
+    int getFrequentRenterPoints();
 }

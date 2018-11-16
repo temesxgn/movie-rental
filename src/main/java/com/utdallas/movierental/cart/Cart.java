@@ -8,9 +8,11 @@ public interface Cart {
 
     List<Rental> getItems();
 
+    void addItem(Rental rental);
+
     double getTotalChargeAmount();
 
     int getTotalFrequentRenterPoints();
 
-    String getName();
+    void clear();
 }

@@ -5,11 +5,11 @@ import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrateg
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrequentRenterPointsCustomerStrategy extends FrequentRenterPointsStrategy {
+public class FrequentRenterPointsCompositeStrategy extends FrequentRenterPointsStrategy {
 
     private List<FrequentRenterPointsStrategy> frequentRenterPointsStrategyList;
 
-    public FrequentRenterPointsCustomerStrategy() {
+    public FrequentRenterPointsCompositeStrategy() {
         frequentRenterPointsStrategyList = new ArrayList<>();
     }
 

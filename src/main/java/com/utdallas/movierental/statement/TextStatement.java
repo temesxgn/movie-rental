@@ -2,12 +2,13 @@ package com.utdallas.movierental.statement;
 
 import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.cart.CartDecorator;
+import com.utdallas.movierental.cutomer.Customer;
 import com.utdallas.movierental.rental.Rental;
 
 public class TextStatement extends Statement {
 
-  public TextStatement(Cart cart) {
-    super(cart);
+  public TextStatement(Customer customer, Cart cart) {
+    super(customer, cart);
   }
 
   @Override
@@ -16,9 +17,9 @@ public class TextStatement extends Statement {
   }
 
   @Override
-  protected String footer() {
-    String footer = String.format("Amount owed is %s.%nYou earned %s frequent renter points",
-            cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints());
+  protected String footer(Customer customer, Cart cart) {
+    String footer = String.format("Amount owed is %s.%nYou earned %s frequent renter points. Total frequent renter points: %s",
+            cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints(), customer.getFrequentRenterPoints());
 
     if (cart instanceof CartDecorator) {
         String discount = cart.toString();
@@ -29,7 +30,7 @@ public class TextStatement extends Statement {
   }
 
   @Override
-  protected String header() {
-    return String.format("%nRental Record for %s%n", cart.getName());
+  protected String header(Customer customer) {
+    return String.format("%nRental Record for %s%n", customer.getName());
   }
 }
