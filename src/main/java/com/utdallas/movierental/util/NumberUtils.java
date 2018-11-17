@@ -11,7 +11,8 @@ public final class NumberUtils {
     }
 
     public static BigDecimal getPercentage(BigDecimal totalChargeAmount, BigDecimal percentage) {
-        BigDecimal percent = totalChargeAmount.multiply(percentage)
+        BigDecimal percent = totalChargeAmount
+                .multiply(percentage)
                 .divide(ONE_HUNDRED, BigDecimal.ROUND_HALF_UP);
 
         return formatTwoDecimalPlaces(percent);

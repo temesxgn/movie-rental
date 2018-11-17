@@ -29,10 +29,12 @@ public final class CheckoutService {
         customer.addOrder(order);
 
         System.out.println(StatementUtil.printAsText(customer, cart));
+        System.out.println(StatementUtil.printAsXML(customer, cart));
     }
 
     private static Cart applyDiscountsAndPromotions(Cart cart, Customer customer) {
-        if (customer.getFrequentRenterPoints() > FREQUENT_RENTER_POINTS_MINIMUM) {
+        // Simulates the customer adding another movie and setting it as free
+        if (customer.getFrequentRenterPoints() >= FREQUENT_RENTER_POINTS_MINIMUM) {
             Rental freeRental = new RentalDecoratorFreeRental(new RegularRental(customer.getCustomerId(), new Movie("Love & Basketball", CategoryType.NEW_RELEASE), 1));
             cart.addItem(freeRental);
             customer.deductFrequentRenterPoints(FREQUENT_RENTER_POINTS_MINIMUM);
