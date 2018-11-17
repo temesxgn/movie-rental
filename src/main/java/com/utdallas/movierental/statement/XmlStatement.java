@@ -2,7 +2,7 @@ package com.utdallas.movierental.statement;
 
 import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.cart.CartDecorator;
-import com.utdallas.movierental.cutomer.Customer;
+import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.rental.Rental;
 import com.utdallas.movierental.rental.RentalDecorator;
 

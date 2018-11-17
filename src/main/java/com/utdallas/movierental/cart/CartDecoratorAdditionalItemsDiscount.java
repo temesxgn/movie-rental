@@ -1,17 +1,20 @@
 package com.utdallas.movierental.cart;
 
+import com.utdallas.movierental.util.NumberUtils;
+
+import java.math.BigDecimal;
+
 public class CartDecoratorAdditionalItemsDiscount extends CartDecorator {
 
-    private static final int percentage = 80;
+    private static final BigDecimal percentage = BigDecimal.valueOf(80);
 
     public CartDecoratorAdditionalItemsDiscount(Cart cart) {
         super(cart);
     }
 
-    // TODO Fix format
     @Override
-    public double getTotalChargeAmount() {
-        return cart.getTotalChargeAmount() * (percentage / 100.0f);
+    public BigDecimal getTotalChargeAmount() {
+        return NumberUtils.getPercentage(cart.getTotalChargeAmount(), percentage);
     }
 
     @Override

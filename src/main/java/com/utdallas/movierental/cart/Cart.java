@@ -1,7 +1,9 @@
 package com.utdallas.movierental.cart;
 
 import com.utdallas.movierental.rental.Rental;
+import com.utdallas.movierental.transaction.Order;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface Cart {
@@ -10,9 +12,10 @@ public interface Cart {
 
     void addItem(Rental rental);
 
-    double getTotalChargeAmount();
+    BigDecimal getTotalChargeAmount();
 
     int getTotalFrequentRenterPoints();
 
-    void clear();
+    Order checkout();
+
 }

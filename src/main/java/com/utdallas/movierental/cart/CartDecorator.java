@@ -1,6 +1,7 @@
 package com.utdallas.movierental.cart;
 
 import com.utdallas.movierental.rental.Rental;
+import com.utdallas.movierental.transaction.Order;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public abstract class CartDecorator implements Cart {
     }
 
     @Override
-    public void clear() {
-        cart.clear();
+    public Order checkout() {
+        return cart.checkout();
     }
 
 }

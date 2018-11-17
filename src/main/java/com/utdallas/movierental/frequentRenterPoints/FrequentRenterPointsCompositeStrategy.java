@@ -1,7 +1,5 @@
 package com.utdallas.movierental.frequentRenterPoints;
 
-import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
 

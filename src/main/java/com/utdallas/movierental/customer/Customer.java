@@ -1,13 +1,28 @@
-package com.utdallas.movierental.cutomer;
+package com.utdallas.movierental.customer;
+
+import com.utdallas.movierental.transaction.Order;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Customer {
+
+    private String customerId;
     private String name;
     private int age;
     private int frequentRenterPoints;
+    private List<Order> orderHistory;
 
     public Customer(String name, int age) {
+        this.customerId = UUID.randomUUID().toString();
         this.name = name;
         this.age = age;
+        this.orderHistory = new ArrayList<>();
+    }
+
+    public String getCustomerId() {
+        return customerId;
     }
 
     public String getName() {
@@ -38,4 +53,11 @@ public class Customer {
         this.frequentRenterPoints -= frequentRenterPoints;
     }
 
+    public void addOrder(Order order) {
+        this.orderHistory.add(order);
+    }
+
+    public List<Order> getOrderHistory() {
+        return orderHistory;
+    }
 }

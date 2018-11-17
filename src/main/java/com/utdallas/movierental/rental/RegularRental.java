@@ -1,28 +1,33 @@
 package com.utdallas.movierental.rental;
 
 
+import com.utdallas.movierental.domain.CategoryType;
+import com.utdallas.movierental.domain.RentalItem;
 import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPoints;
 import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyFactory;
-import com.utdallas.movierental.price.PriceFactory;
-import com.utdallas.movierental.movie.Movie;
-import com.utdallas.movierental.movie.MovieType;
 import com.utdallas.movierental.price.Price;
+import com.utdallas.movierental.price.PriceFactory;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
 
 public class RegularRental implements Rental {
 
-    private Movie movie;
+    private String customerId;
+    private RentalItem item;
     private Price price;
     private int daysRented;
     private FrequentRenterPoints frequentRentalPointsStrategy;
 
-    public RegularRental(Movie movie, int daysRented) {
-        this.movie = movie;
+    public RegularRental(final String customerId, final RentalItem item, final int daysRented) {
+        this.customerId = customerId;
+        this.item = item;
         this.daysRented = daysRented;
-        this.price = PriceFactory.getPrice(movie.getMovieType());
-        this.frequentRentalPointsStrategy = FrequentRenterPointsStrategyFactory.newRentalFrequentRenterPointsStrategy(movie.getMovieType(), daysRented);
+        this.price = PriceFactory.getPrice(item.getCategoryType());
+        this.frequentRentalPointsStrategy = FrequentRenterPointsStrategyFactory.newRentalFrequentRenterPointsStrategy(item.getCategoryType(), daysRented);
+    }
+
+    public String getCustomerId() {
+        return customerId;
     }
 
     public int getDaysRented() {
@@ -30,14 +35,14 @@ public class RegularRental implements Rental {
     }
 
     public String getMovieTitle() {
-        return movie.getTitle();
+        return item.getTitle();
     }
 
-    public MovieType getMovieType() {
-        return movie.getMovieType();
+    public CategoryType getMovieType() {
+        return item.getCategoryType();
     }
 
-    public double getChargeAmount() {
+    public BigDecimal getChargeAmount() {
         return price.getChargeAmount(daysRented);
     }
 

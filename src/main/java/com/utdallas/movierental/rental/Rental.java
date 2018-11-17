@@ -1,11 +1,8 @@
 package com.utdallas.movierental.rental;
 
-import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPoints;
-import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyFactory;
-import com.utdallas.movierental.movie.Movie;
-import com.utdallas.movierental.movie.MovieType;
-import com.utdallas.movierental.price.Price;
-import com.utdallas.movierental.price.PriceFactory;
+import com.utdallas.movierental.domain.CategoryType;
+
+import java.math.BigDecimal;
 
 public interface Rental {
 
@@ -13,9 +10,9 @@ public interface Rental {
 
     String getMovieTitle();
 
-    MovieType getMovieType();
+    CategoryType getMovieType();
 
-    double getChargeAmount();
+    BigDecimal getChargeAmount();
 
     int getFrequentRenterPoints();
 }

@@ -1,6 +1,6 @@
 package com.utdallas.movierental.frequentRenterPoints;
 
-public class FrequentRenterPointsStrategyNewReleaseTypeDoublePoints extends FrequentRenterPointsStrategy {
+public class FrequentRenterPointsStrategyNewReleaseTypeExtendedRental extends FrequentRenterPointsStrategyNewReleaseType {
 
     @Override
     public int getPoints() {

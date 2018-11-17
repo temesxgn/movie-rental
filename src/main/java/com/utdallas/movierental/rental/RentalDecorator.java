@@ -1,7 +1,8 @@
 package com.utdallas.movierental.rental;
 
-import com.utdallas.movierental.movie.Movie;
-import com.utdallas.movierental.movie.MovieType;
+import com.utdallas.movierental.domain.CategoryType;
+
+import java.math.BigDecimal;
 
 public abstract class RentalDecorator implements Rental  {
 
@@ -22,12 +23,12 @@ public abstract class RentalDecorator implements Rental  {
     }
 
     @Override
-    public MovieType getMovieType() {
+    public CategoryType getMovieType() {
         return this.rental.getMovieType();
     }
 
     @Override
-    public double getChargeAmount() {
+    public BigDecimal getChargeAmount() {
         return this.rental.getChargeAmount();
     }
 

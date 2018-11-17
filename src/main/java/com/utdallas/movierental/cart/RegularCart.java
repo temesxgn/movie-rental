@@ -1,10 +1,13 @@
 package com.utdallas.movierental.cart;
 
-import com.utdallas.movierental.cutomer.Customer;
+import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPoints;
 import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyFactory;
 import com.utdallas.movierental.rental.Rental;
+import com.utdallas.movierental.transaction.Order;
+import com.utdallas.movierental.util.NumberUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class RegularCart implements Cart {
@@ -28,8 +31,8 @@ public class RegularCart implements Cart {
     }
 
     @Override
-    public double getTotalChargeAmount() {
-        return rentals.stream().mapToDouble(Rental::getChargeAmount).sum();
+    public BigDecimal getTotalChargeAmount() {
+        return NumberUtils.formatTwoDecimalPlaces(rentals.stream().map(Rental::getChargeAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
     }
 
     @Override
@@ -39,7 +42,8 @@ public class RegularCart implements Cart {
     }
 
     @Override
-    public void clear() {
-        this.rentals.clear();
+    public Order checkout() {
+        return new Order(customer.getCustomerId(), rentals, getTotalChargeAmount(), getTotalFrequentRenterPoints());
     }
+
 }

@@ -1,11 +1,6 @@
 package com.utdallas.movierental.price;
 
-import com.utdallas.movierental.exception.IllegalMovieTypeException;
-import com.utdallas.movierental.movie.MovieType;
-import com.utdallas.movierental.price.ChildrensPrice;
-import com.utdallas.movierental.price.NewReleasePrice;
-import com.utdallas.movierental.price.Price;
-import com.utdallas.movierental.price.RegularPrice;
+import com.utdallas.movierental.domain.CategoryType;
 
 public final class PriceFactory {
 
@@ -13,7 +8,7 @@ public final class PriceFactory {
 
   }
 
-  public static Price getPrice(MovieType type) {
+  public static Price getPrice(CategoryType type) {
     switch (type) {
       case CHILDRENS:
         return new ChildrensPrice();

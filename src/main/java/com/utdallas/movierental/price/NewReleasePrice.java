@@ -1,12 +1,14 @@
 package com.utdallas.movierental.price;
 
+import java.math.BigDecimal;
+
 public class NewReleasePrice implements Price {
 
     private static final double CHARGE_MULTIPLIER = 3;
 
     @Override
-    public double getChargeAmount(int daysRented) {
-        return daysRented * CHARGE_MULTIPLIER;
+    public BigDecimal getChargeAmount(int daysRented) {
+        return BigDecimal.valueOf(daysRented * CHARGE_MULTIPLIER);
     }
 
 }
