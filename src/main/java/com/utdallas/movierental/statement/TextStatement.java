@@ -2,37 +2,37 @@ package com.utdallas.movierental.statement;
 
 import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.cart.CartDecorator;
+import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.customer.Customer;
-import com.utdallas.movierental.rental.Rental;
-import com.utdallas.movierental.rental.RentalDecorator;
+import com.utdallas.movierental.checkoutoption.rental.RentalDecorator;
 import com.utdallas.movierental.util.NumberUtils;
 
 public class TextStatement extends Statement {
 
-  public TextStatement(Customer customer, Cart cart) {
-    super(customer, cart);
+  public TextStatement(Cart cart) {
+    super(cart);
   }
 
   @Override
-  protected String detail(Rental rental) {
-    return String.format("\t%s\t$%s%n", rental.getMovieTitle(), NumberUtils.formatTwoDecimalPlaces(rental.getChargeAmount()));
+  protected String detail(CheckoutOption item) {
+    return String.format("\t%s\t$%s%n", item.getTitle(), NumberUtils.formatTwoDecimalPlaces(item.getChargeAmount()));
   }
 
   @Override
-  protected String footer(Customer customer, Cart cart) {
+  protected String footer(Cart cart) {
     String footer = String.format("Amount owed: $%s%nYou earned %s frequent renter points.%nTotal frequent renter points: %s",
-            cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints(), customer.getFrequentRenterPoints());
+            cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints(), cart.getCustomer().getFrequentRenterPoints());
 
     if (cart instanceof CartDecorator) {
         String discount = cart.toString();
         footer = String.format("%s discount has been applied! %n%s", discount, footer);
     }
 
-    Rental rental = cart.getItems().stream().filter(r -> r instanceof RentalDecorator).findFirst().orElse(null);
+    CheckoutOption rental = cart.getItems().stream().filter(r -> r instanceof RentalDecorator).findFirst().orElse(null);
 
     if (rental != null) {
       String promotion = rental.toString();
-      footer = String.format("%s promotion has been applied to %s! %n%s", promotion, rental.getMovieTitle(), footer);
+      footer = String.format("%s promotion has been applied to %s! %n%s", promotion, rental.getTitle(), footer);
     }
 
     return footer;

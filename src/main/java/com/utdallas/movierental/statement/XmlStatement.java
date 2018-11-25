@@ -2,21 +2,21 @@ package com.utdallas.movierental.statement;
 
 import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.cart.CartDecorator;
+import com.utdallas.movierental.checkoutoption.CheckoutOption;
+import com.utdallas.movierental.checkoutoption.rental.RentalDecorator;
 import com.utdallas.movierental.customer.Customer;
-import com.utdallas.movierental.rental.Rental;
-import com.utdallas.movierental.rental.RentalDecorator;
 
 public class XmlStatement extends Statement {
 
-  public XmlStatement(Customer customer, Cart cart) {
-    super(customer, cart);
+  public XmlStatement(Cart cart) {
+    super(cart);
   }
 
   @Override
-  protected String detail(Rental rental) {
-    String detail = String.format("<movie>%n\t<title>%s</title>%n\t<chargeAmount>%s</chargeAmount>%n<movie>%n", rental.getMovieTitle(), rental.getChargeAmount());
-    if (rental instanceof RentalDecorator) {
-      String promotion = rental.toString();
+  protected String detail(CheckoutOption item) {
+    String detail = String.format("<item>%n\t<title>%s</title>%n\t<chargeAmount>%s</chargeAmount>%n<item>%n", item.getTitle(), item.getChargeAmount());
+    if (item instanceof RentalDecorator) {
+      String promotion = item.toString();
       detail = String.format("<promotion>%s</promotion>%n%s", promotion, detail);
     }
 
@@ -24,7 +24,7 @@ public class XmlStatement extends Statement {
   }
 
   @Override
-  protected String footer(Customer customer, Cart cart) {
+  protected String footer(Cart cart) {
     String footer = String.format("<amountOwed>%s</amountOwed>%n<earnedFrequentRenterPoints>%s</earnedFrequentRenterPoints>%n",
             cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints());
 

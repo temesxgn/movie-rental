@@ -1,0 +1,8 @@
+package com.utdallas.movierental.frequentRenterPoints.purchase;
+
+import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategy;
+import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyRegularType;
+
+public class FrequentRenterPointsPurchaseStrategyRegularType extends FrequentRenterPointsStrategyRegularType {
+
+}

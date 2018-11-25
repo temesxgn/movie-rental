@@ -1,6 +1,7 @@
 package com.utdallas.movierental.cart;
 
-import com.utdallas.movierental.rental.Rental;
+import com.utdallas.movierental.checkoutoption.CheckoutOption;
+import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.transaction.Order;
 
 import java.util.List;
@@ -14,12 +15,12 @@ public abstract class CartDecorator implements Cart {
     }
 
     @Override
-    public void addItem(Rental rental) {
-        cart.addItem(rental);
+    public void addItem(CheckoutOption item) {
+        cart.addItem(item);
     }
 
     @Override
-    public List<Rental> getItems() {
+    public List<CheckoutOption> getItems() {
         return cart.getItems();
     }
 
@@ -31,6 +32,16 @@ public abstract class CartDecorator implements Cart {
     @Override
     public Order checkout() {
         return cart.checkout();
+    }
+
+    @Override
+    public void clear() {
+        cart.clear();
+    }
+
+    @Override
+    public Customer getCustomer() {
+        return cart.getCustomer();
     }
 
 }
