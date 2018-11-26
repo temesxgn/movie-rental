@@ -1,5 +1,9 @@
 package com.utdallas.movierental.domain;
 
+import com.utdallas.movierental.price.Price;
+
+import java.math.BigDecimal;
+
 public interface Item {
 
     String getTitle();
@@ -9,4 +13,6 @@ public interface Item {
     CategoryType getCategoryType();
 
     void setCategoryType(CategoryType categoryType);
+
+    BigDecimal getPrice();
 }

@@ -13,6 +13,8 @@ public interface Cart {
 
     void addItem(CheckoutOption item);
 
+    void removeItem(CheckoutOption item);
+
     BigDecimal getTotalChargeAmount();
 
     int getTotalFrequentRenterPoints();

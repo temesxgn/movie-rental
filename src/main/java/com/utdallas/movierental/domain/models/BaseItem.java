@@ -2,16 +2,24 @@ package com.utdallas.movierental.domain.models;
 
 import com.utdallas.movierental.domain.CategoryType;
 import com.utdallas.movierental.domain.Item;
+import com.utdallas.movierental.domain.ModelType;
+import com.utdallas.movierental.price.Price;
+import com.utdallas.movierental.price.PriceFactory;
+
+import java.math.BigDecimal;
 
 //TODO Figure out better name
-public abstract class RegularItem implements Item {
+public abstract class BaseItem implements Item {
 
     private String title;
     private CategoryType categoryType;
+    private Price price;
 
-    public RegularItem(String title, CategoryType categoryType) {
+    //TODO Figure better way to pass category and model types
+    public BaseItem(String title, CategoryType categoryType, ModelType modelType) {
         this.title = title;
         this.categoryType = categoryType;
+        this.price = PriceFactory.getFactory(categoryType, modelType).getPrice();
     }
 
     @Override
@@ -32,5 +40,10 @@ public abstract class RegularItem implements Item {
     @Override
     public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        return price.getChargeAmount();
     }
 }

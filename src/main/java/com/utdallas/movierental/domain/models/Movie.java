@@ -2,7 +2,7 @@ package com.utdallas.movierental.domain.models;
 
 import com.utdallas.movierental.domain.CategoryType;
 
-public class Movie extends RegularItem {
+public class Movie extends BaseItem {
 
     public Movie(String title, CategoryType categoryType) {
         super(title, categoryType);

@@ -20,6 +20,11 @@ public abstract class CartDecorator implements Cart {
     }
 
     @Override
+    public void removeItem(CheckoutOption item) {
+        cart.removeItem(item);
+    }
+
+    @Override
     public List<CheckoutOption> getItems() {
         return cart.getItems();
     }

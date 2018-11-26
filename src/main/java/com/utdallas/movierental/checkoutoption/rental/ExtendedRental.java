@@ -1,0 +1,20 @@
+package com.utdallas.movierental.checkoutoption.rental;
+
+import com.utdallas.movierental.domain.Item;
+import com.utdallas.movierental.util.NumberUtils;
+
+import java.math.BigDecimal;
+
+public class ExtendedRental extends RegularRental {
+
+    private static final BigDecimal PERCENTAGE = BigDecimal.valueOf(95);
+
+    public ExtendedRental(String customerId, Item item, int daysRented) {
+        super(customerId, item, daysRented);
+    }
+
+    @Override
+    public BigDecimal getChargeAmount() {
+        return NumberUtils.getPercentage(this.item.getPrice(), PERCENTAGE);
+    }
+}

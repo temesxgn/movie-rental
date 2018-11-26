@@ -1,5 +1,7 @@
 package com.utdallas.movierental.domain;
 
+import java.math.BigDecimal;
+
 public abstract class ItemDecorator implements Item {
 
     private Item item;
@@ -26,5 +28,10 @@ public abstract class ItemDecorator implements Item {
     @Override
     public void setCategoryType(CategoryType categoryType) {
         item.setCategoryType(categoryType);
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        return item.getPrice();
     }
 }

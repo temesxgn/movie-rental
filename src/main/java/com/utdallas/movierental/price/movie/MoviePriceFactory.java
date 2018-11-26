@@ -1,21 +1,15 @@
-package com.utdallas.movierental.price.purchase;
+package com.utdallas.movierental.price.movie;
 
-import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.domain.CategoryType;
-import com.utdallas.movierental.domain.Item;
 import com.utdallas.movierental.price.Price;
 import com.utdallas.movierental.price.PriceFactory;
 
-public final class PurchasePriceFactory extends PriceFactory {
+public final class MoviePriceFactory extends PriceFactory {
 
   private CategoryType type;
 
-  public PurchasePriceFactory(CheckoutOption option) {
-    this.type = option.getCategory();
-  }
-
-  public static Price getPrice(Item item) {
-    return getPrice(item.getCategoryType());
+  public MoviePriceFactory(CategoryType categoryType) {
+    this.type = categoryType;
   }
 
   public Price getPrice() {

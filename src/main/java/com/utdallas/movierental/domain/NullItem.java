@@ -1,5 +1,7 @@
 package com.utdallas.movierental.domain;
 
+import java.math.BigDecimal;
+
 public class NullItem implements Item {
     @Override
     public String getTitle() {
@@ -19,5 +21,10 @@ public class NullItem implements Item {
     @Override
     public void setCategoryType(CategoryType categoryType) {
 
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        return BigDecimal.ZERO;
     }
 }

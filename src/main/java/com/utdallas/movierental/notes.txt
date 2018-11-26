@@ -1,0 +1,11 @@
+1. Item will have price dependent on category type
+2. Price would be different for renting (base price), extended rental, and purchase.
+3. Rental is considered extended if longer than 4 days.
+4. If rental is passed 3 weeks it will be considered as Purchase
+5. Purchase would be 120% of base price
+
+1. Price for each domain model
+2. Can have a default price for all models
+
+//TODO figure out proper way to get points for rental and purchase. Should it be based off item points and points from check out type?
+//TODO should extended rental be a class or a strategy for price and frp?

@@ -31,6 +31,12 @@ public class RegularCart implements Cart {
     }
 
     @Override
+    public void removeItem(CheckoutOption item) {
+        //TODO update logic, maybe pass index of item or item and checkout type?
+        this.items.remove(item);
+    }
+
+    @Override
     public BigDecimal getTotalChargeAmount() {
         return NumberUtils.formatTwoDecimalPlaces(items.stream().map(CheckoutOption::getChargeAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
     }

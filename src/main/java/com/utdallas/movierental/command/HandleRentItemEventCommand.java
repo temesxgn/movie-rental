@@ -38,13 +38,16 @@ public class HandleRentItemEventCommand extends BaseCommand {
         }
     }
 
+    //TODO this can be extracted into multiple methods
     private void askUserForRentLengthAndAddToCart(Entry entry) {
         ApplicationUtil.print("How many days would you like to rent? Days: ");
         int rentLength = scanner.nextInt();
         ApplicationUtil.println("Rent " + entry.getItem().getTitle() + " for " + rentLength + " days");
         cart.addItem(ItemFactory.createRentalItem(cart.getCustomer(), entry.getItem(), rentLength));
+        DatabaseService.deductAvailabilityAmountForEntry(entry.getId(), BigDecimal.ONE.intValue());
     }
 
+    //TODO can be moved to shared area
     private boolean isSelectedQuantityAvailable(final int selectedQuantity, final int availableQuantity) {
         return selectedQuantity <= availableQuantity;
     }
