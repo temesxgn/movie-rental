@@ -2,10 +2,9 @@ package com.utdallas.movierental.service;
 
 import com.utdallas.movierental.database.Database;
 import com.utdallas.movierental.database.Entry;
-import com.utdallas.movierental.domain.CategoryType;
+import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.domain.Item;
 import com.utdallas.movierental.domain.ItemFactory;
-import com.utdallas.movierental.util.ApplicationUtil;
 
 import java.util.Arrays;
 import java.util.List;

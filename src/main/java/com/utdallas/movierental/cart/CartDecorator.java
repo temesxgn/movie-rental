@@ -30,8 +30,8 @@ public abstract class CartDecorator implements Cart {
     }
 
     @Override
-    public int getTotalFrequentRenterPoints() {
-        return cart.getTotalFrequentRenterPoints();
+    public int getTotalFrequentCustomerPoints() {
+        return cart.getTotalFrequentCustomerPoints();
     }
 
     @Override

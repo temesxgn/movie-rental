@@ -15,7 +15,7 @@ public class RentalDecoratorFreeRental extends RentalDecorator {
     }
 
     @Override
-    public int getFrequentRenterPoints() {
+    public int getFrequentCustomerPoints() {
         return BigDecimal.ZERO.intValue();
     }
 

@@ -1,0 +1,7 @@
+package com.utdallas.movierental.frequentcustomerpoints.purchase;
+
+import com.utdallas.movierental.frequentcustomerpoints.FrequentCustomerPointsStrategyRegularType;
+
+public class FrequentCustomerPointsPurchaseStrategyRegularType extends FrequentCustomerPointsStrategyRegularType {
+
+}

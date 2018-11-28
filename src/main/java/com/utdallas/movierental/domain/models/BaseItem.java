@@ -1,8 +1,8 @@
 package com.utdallas.movierental.domain.models;
 
-import com.utdallas.movierental.domain.CategoryType;
+import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.domain.Item;
-import com.utdallas.movierental.domain.ModelType;
+import com.utdallas.movierental.domain.type.ModelType;
 import com.utdallas.movierental.price.Price;
 import com.utdallas.movierental.price.PriceFactory;
 
@@ -19,7 +19,7 @@ public abstract class BaseItem implements Item {
     public BaseItem(String title, CategoryType categoryType, ModelType modelType) {
         this.title = title;
         this.categoryType = categoryType;
-        this.price = PriceFactory.getFactory(categoryType, modelType).getPrice();
+        this.price = PriceFactory.getItemPriceFactory(categoryType, modelType).getPrice();
     }
 
     @Override

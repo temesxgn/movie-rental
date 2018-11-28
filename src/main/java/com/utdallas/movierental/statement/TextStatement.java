@@ -20,8 +20,8 @@ public class TextStatement extends Statement {
 
   @Override
   protected String footer(Cart cart) {
-    String footer = String.format("Amount owed: $%s%nYou earned %s frequent renter points.%nTotal frequent renter points: %s",
-            cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints(), cart.getCustomer().getFrequentRenterPoints());
+    String footer = String.format("Amount owed: $%s%nYou earned %s frequent customer points.%nTotal frequent customer points: %s",
+            cart.getTotalChargeAmount(), cart.getTotalFrequentCustomerPoints(), cart.getCustomer().getFrequentCustomerPoints());
 
     if (cart instanceof CartDecorator) {
         String discount = cart.toString();

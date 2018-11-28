@@ -1,6 +1,7 @@
 package com.utdallas.movierental.command;
 
 import com.utdallas.movierental.cart.Cart;
+import com.utdallas.movierental.checkoutoption.CheckoutOptionFactory;
 import com.utdallas.movierental.database.Entry;
 import com.utdallas.movierental.domain.ItemFactory;
 import com.utdallas.movierental.service.DatabaseService;
@@ -43,7 +44,7 @@ public class HandleRentItemEventCommand extends BaseCommand {
         ApplicationUtil.print("How many days would you like to rent? Days: ");
         int rentLength = scanner.nextInt();
         ApplicationUtil.println("Rent " + entry.getItem().getTitle() + " for " + rentLength + " days");
-        cart.addItem(ItemFactory.createRentalItem(cart.getCustomer(), entry.getItem(), rentLength));
+        cart.addItem(CheckoutOptionFactory.createRentalItem(cart.getCustomer(), entry.getItem(), rentLength));
         DatabaseService.deductAvailabilityAmountForEntry(entry.getId(), BigDecimal.ONE.intValue());
     }
 

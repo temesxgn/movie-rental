@@ -4,7 +4,7 @@ import com.utdallas.movierental.exception.InvalidInputTypeException;
 
 public final class CommandFactory {
 
-    public static Command getCommand(CommandFactoryData data) throws InvalidInputTypeException {
+    public static Command getCommand(CommandFactoryInput data) throws InvalidInputTypeException {
 
         Command command;
         switch (data.getCommandType()) {

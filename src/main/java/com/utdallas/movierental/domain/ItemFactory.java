@@ -1,23 +1,9 @@
 package com.utdallas.movierental.domain;
 
-import com.utdallas.movierental.checkoutoption.purchase.Purchase;
-import com.utdallas.movierental.checkoutoption.purchase.RegularPurchase;
-import com.utdallas.movierental.checkoutoption.rental.ExtendedRental;
-import com.utdallas.movierental.checkoutoption.rental.RegularRental;
-import com.utdallas.movierental.checkoutoption.rental.Rental;
-import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.domain.models.*;
+import com.utdallas.movierental.domain.type.CategoryType;
 
 public final class ItemFactory {
-
-    public static Purchase createPurchaseItem(final Customer customer, final Item kingdomHearts) {
-        return new RegularPurchase(customer.getCustomerId(), kingdomHearts);
-    }
-
-    //TODO should extended rental be a class or a strategy for price and frp?
-    public static Rental createRentalItem(final Customer customer, final Item item, final int daysRented) {
-        return daysRented > 4 ? new ExtendedRental(customer.getCustomerId(), item, daysRented) : new RegularRental(customer.getCustomerId(), item, daysRented);
-    }
 
     public static Book createBook(final String title, final CategoryType type) {
         return new Book(title, type);

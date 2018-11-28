@@ -1,6 +1,6 @@
 package com.utdallas.movierental.checkoutoption.rental;
 
-import com.utdallas.movierental.domain.CategoryType;
+import com.utdallas.movierental.domain.type.CategoryType;
 
 import java.math.BigDecimal;
 
@@ -33,7 +33,7 @@ public abstract class RentalDecorator implements Rental  {
     }
 
     @Override
-    public int getFrequentRenterPoints() {
-        return this.rental.getFrequentRenterPoints();
+    public int getFrequentCustomerPoints() {
+        return this.rental.getFrequentCustomerPoints();
     }
 }

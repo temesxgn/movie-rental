@@ -1,6 +1,6 @@
 package com.utdallas.movierental.price.cd;
 
-import com.utdallas.movierental.domain.CategoryType;
+import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.price.Price;
 import com.utdallas.movierental.price.PriceFactory;
 

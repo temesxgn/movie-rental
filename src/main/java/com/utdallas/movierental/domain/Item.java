@@ -1,6 +1,6 @@
 package com.utdallas.movierental.domain;
 
-import com.utdallas.movierental.price.Price;
+import com.utdallas.movierental.domain.type.CategoryType;
 
 import java.math.BigDecimal;
 

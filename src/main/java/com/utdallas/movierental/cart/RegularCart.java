@@ -2,8 +2,8 @@ package com.utdallas.movierental.cart;
 
 import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.customer.Customer;
-import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPoints;
-import com.utdallas.movierental.frequentRenterPoints.customer.FrequentRenterPointsCustomerStrategyFactory;
+import com.utdallas.movierental.frequentcustomerpoints.FrequentCustomerPoints;
+import com.utdallas.movierental.frequentcustomerpoints.customer.FrequentCustomerPointsCustomerStrategyFactory;
 import com.utdallas.movierental.transaction.Order;
 import com.utdallas.movierental.util.NumberUtils;
 
@@ -42,14 +42,14 @@ public class RegularCart implements Cart {
     }
 
     @Override
-    public int getTotalFrequentRenterPoints() {
-        FrequentRenterPoints customerFrequentRenterPoints = FrequentRenterPointsCustomerStrategyFactory.getStrategy(customer, items);
-        return customerFrequentRenterPoints.getPoints() + items.stream().mapToInt(CheckoutOption::getFrequentRenterPoints).sum();
+    public int getTotalFrequentCustomerPoints() {
+        FrequentCustomerPoints customerFrequentCustomerPoints = FrequentCustomerPointsCustomerStrategyFactory.getStrategy(customer, items);
+        return customerFrequentCustomerPoints.getPoints() + items.stream().mapToInt(CheckoutOption::getFrequentCustomerPoints).sum();
     }
 
     @Override
     public Order checkout() {
-        return new Order(customer.getCustomerId(), items, getTotalChargeAmount(), getTotalFrequentRenterPoints());
+        return new Order(customer.getCustomerId(), items, getTotalChargeAmount(), getTotalFrequentCustomerPoints());
     }
 
     @Override

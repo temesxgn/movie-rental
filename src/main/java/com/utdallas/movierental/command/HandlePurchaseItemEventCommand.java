@@ -1,6 +1,7 @@
 package com.utdallas.movierental.command;
 
 import com.utdallas.movierental.cart.Cart;
+import com.utdallas.movierental.checkoutoption.CheckoutOptionFactory;
 import com.utdallas.movierental.database.Entry;
 import com.utdallas.movierental.domain.ItemFactory;
 import com.utdallas.movierental.service.DatabaseService;
@@ -42,7 +43,7 @@ public class HandlePurchaseItemEventCommand extends BaseCommand {
 
     private void addItemToCartNTimesAndUpdateDatabase(Entry entry, int selectedQuantity) {
         for (int i = 0; i < selectedQuantity; i++) {
-            cart.addItem(ItemFactory.createPurchaseItem(cart.getCustomer(), entry.getItem()));
+            cart.addItem(CheckoutOptionFactory.createPurchaseItem(cart.getCustomer(), entry.getItem()));
         }
 
         DatabaseService.deductAvailabilityAmountForEntry(entry.getId(), selectedQuantity);

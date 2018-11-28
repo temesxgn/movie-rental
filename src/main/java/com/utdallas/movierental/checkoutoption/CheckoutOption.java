@@ -1,6 +1,6 @@
 package com.utdallas.movierental.checkoutoption;
 
-import com.utdallas.movierental.domain.CategoryType;
+import com.utdallas.movierental.domain.type.CategoryType;
 
 import java.math.BigDecimal;
 
@@ -12,6 +12,6 @@ public interface CheckoutOption {
 
     BigDecimal getChargeAmount();
 
-    int getFrequentRenterPoints();
+    int getFrequentCustomerPoints();
 
 }

@@ -1,8 +1,6 @@
 package com.utdallas.movierental.price.game;
 
-import com.utdallas.movierental.checkoutoption.CheckoutOption;
-import com.utdallas.movierental.domain.CategoryType;
-import com.utdallas.movierental.domain.Item;
+import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.price.Price;
 import com.utdallas.movierental.price.PriceFactory;
 

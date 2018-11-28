@@ -1,8 +1,0 @@
-package com.utdallas.movierental.frequentRenterPoints.rental;
-
-import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategy;
-import com.utdallas.movierental.frequentRenterPoints.FrequentRenterPointsStrategyChildrensType;
-
-public class FrequentRenterPointsRentalStrategyChildrensType extends FrequentRenterPointsStrategyChildrensType {
-
-}

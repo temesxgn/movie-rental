@@ -1,0 +1,7 @@
+package com.utdallas.movierental.frequentcustomerpoints.rental;
+
+import com.utdallas.movierental.frequentcustomerpoints.FrequentCustomerPointsStrategyNewReleaseType;
+
+public class FrequentCustomerPointsRentalStrategyNewReleaseType extends FrequentCustomerPointsStrategyNewReleaseType {
+
+}

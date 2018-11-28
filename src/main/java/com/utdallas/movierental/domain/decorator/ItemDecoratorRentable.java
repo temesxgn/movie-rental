@@ -1,4 +1,6 @@
-package com.utdallas.movierental.domain;
+package com.utdallas.movierental.domain.decorator;
+
+import com.utdallas.movierental.domain.Item;
 
 public class ItemDecoratorRentable extends ItemDecorator implements Item {
 

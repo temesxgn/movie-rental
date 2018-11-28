@@ -3,13 +3,13 @@ package com.utdallas.movierental.command;
 import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.customer.Customer;
 
-public class CommandFactoryData {
+public class CommandFactoryInput {
 
     private CommandType commandType;
     private Cart cart;
     private Customer customer;
 
-    public CommandFactoryData(CommandType commandType, Customer customer, Cart cart) {
+    public CommandFactoryInput(CommandType commandType, Customer customer, Cart cart) {
         this.commandType = commandType;
         this.customer = customer;
         this.cart = cart;

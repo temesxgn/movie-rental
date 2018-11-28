@@ -1,4 +1,7 @@
-package com.utdallas.movierental.domain;
+package com.utdallas.movierental.domain.decorator;
+
+import com.utdallas.movierental.domain.type.CategoryType;
+import com.utdallas.movierental.domain.Item;
 
 import java.math.BigDecimal;
 

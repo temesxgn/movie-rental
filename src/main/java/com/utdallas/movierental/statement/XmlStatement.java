@@ -25,8 +25,8 @@ public class XmlStatement extends Statement {
 
   @Override
   protected String footer(Cart cart) {
-    String footer = String.format("<amountOwed>%s</amountOwed>%n<earnedFrequentRenterPoints>%s</earnedFrequentRenterPoints>%n",
-            cart.getTotalChargeAmount(), cart.getTotalFrequentRenterPoints());
+    String footer = String.format("<amountOwed>%s</amountOwed>%n<earnedFrequentCustomerPoints>%s</earnedFrequentCustomerPoints>%n",
+            cart.getTotalChargeAmount(), cart.getTotalFrequentCustomerPoints());
 
     if (cart instanceof CartDecorator) {
       String discount = cart.toString();

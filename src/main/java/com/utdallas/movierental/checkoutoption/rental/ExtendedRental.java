@@ -5,12 +5,15 @@ import com.utdallas.movierental.util.NumberUtils;
 
 import java.math.BigDecimal;
 
+//TODO makes sense to be class instead of decorator since its more static than dynamic
 public class ExtendedRental extends RegularRental {
 
-    private static final BigDecimal PERCENTAGE = BigDecimal.valueOf(95);
+    //TODO update name to be more clear
+    private static final int EXTENDED_RENTAL_PERCENTAGE = 95;
 
     public ExtendedRental(String customerId, Item item, int daysRented) {
         super(customerId, item, daysRented);
+        PERCENTAGE = BigDecimal.valueOf(EXTENDED_RENTAL_PERCENTAGE);
     }
 
     @Override

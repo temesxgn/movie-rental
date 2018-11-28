@@ -5,7 +5,7 @@ import com.utdallas.movierental.cart.CartFactory;
 import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.command.Command;
 import com.utdallas.movierental.command.CommandFactory;
-import com.utdallas.movierental.command.CommandFactoryData;
+import com.utdallas.movierental.command.CommandFactoryInput;
 import com.utdallas.movierental.command.CommandType;
 import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.customer.CustomerBuilder;
@@ -35,7 +35,7 @@ public class MovieRentalApplication {
             ApplicationUtil.println("Enter [L]ist, [D]one, [P]urchase, [R]ent, [C]heckout, [E]mpty cart, [O]rder history, [I]nfo");
             try {
                 CommandType option = CommandType.findByCode(scanner.nextLine());
-                Command command = CommandFactory.getCommand(new CommandFactoryData(option, customer, cart));
+                Command command = CommandFactory.getCommand(new CommandFactoryInput(option, customer, cart));
                 command.execute();
             } catch (InvalidInputTypeException e) {
                 ApplicationUtil.println("Invalid input! Please select from the options above.");

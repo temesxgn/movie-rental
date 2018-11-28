@@ -1,5 +1,7 @@
 package com.utdallas.movierental.domain;
 
+import com.utdallas.movierental.domain.type.CategoryType;
+
 import java.math.BigDecimal;
 
 public class NullItem implements Item {

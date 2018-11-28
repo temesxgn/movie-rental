@@ -17,7 +17,7 @@ public interface Cart {
 
     BigDecimal getTotalChargeAmount();
 
-    int getTotalFrequentRenterPoints();
+    int getTotalFrequentCustomerPoints();
 
     Order checkout();
 

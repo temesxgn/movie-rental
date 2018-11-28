@@ -1,4 +1,4 @@
-package com.utdallas.movierental.domain;
+package com.utdallas.movierental.domain.type;
 
 public enum CategoryType {
   CHILDRENS,

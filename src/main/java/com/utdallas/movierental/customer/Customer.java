@@ -11,7 +11,7 @@ public class Customer {
     private String customerId;
     private String name;
     private int age;
-    private int frequentRenterPoints;
+    private int frequentCustomerPoints;
     private List<Order> orderHistory;
 
     public Customer(String name, int age) {
@@ -41,16 +41,16 @@ public class Customer {
         this.age = age;
     }
 
-    public int getFrequentRenterPoints() {
-        return frequentRenterPoints;
+    public int getFrequentCustomerPoints() {
+        return frequentCustomerPoints;
     }
 
-    public void addFrequentRenterPoints(int frequentRenterPoints) {
-        this.frequentRenterPoints += frequentRenterPoints;
+    public void addFrequentCustomerPoints(int frequentCustomerPoints) {
+        this.frequentCustomerPoints += frequentCustomerPoints;
     }
 
-    public void deductFrequentRenterPoints(int frequentRenterPoints) {
-        this.frequentRenterPoints -= frequentRenterPoints;
+    public void deductFrequentCustomerPoints(int frequentCustomerPoints) {
+        this.frequentCustomerPoints -= frequentCustomerPoints;
     }
 
     public void addOrder(Order order) {
