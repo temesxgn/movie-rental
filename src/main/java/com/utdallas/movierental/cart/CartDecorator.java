@@ -2,7 +2,7 @@ package com.utdallas.movierental.cart;
 
 import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.customer.Customer;
-import com.utdallas.movierental.transaction.Order;
+import com.utdallas.movierental.customer.Order;
 
 import java.util.List;
 

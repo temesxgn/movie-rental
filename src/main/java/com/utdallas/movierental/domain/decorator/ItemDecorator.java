@@ -2,12 +2,14 @@ package com.utdallas.movierental.domain.decorator;
 
 import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.domain.Item;
+import com.utdallas.movierental.domain.type.ModelType;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public abstract class ItemDecorator implements Item {
 
-    private Item item;
+    protected Item item;
 
     public ItemDecorator(Item item) {
         this.item = item;
@@ -19,6 +21,11 @@ public abstract class ItemDecorator implements Item {
     }
 
     @Override
+    public Date getAvailableDate() {
+        return item.getAvailableDate();
+    }
+
+    @Override
     public void setTitle(String title) {
         item.setTitle(title);
     }
@@ -26,6 +33,11 @@ public abstract class ItemDecorator implements Item {
     @Override
     public CategoryType getCategoryType() {
         return item.getCategoryType();
+    }
+
+    @Override
+    public ModelType getModelType() {
+        return item.getModelType();
     }
 
     @Override

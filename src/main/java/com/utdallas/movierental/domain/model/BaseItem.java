@@ -1,25 +1,28 @@
-package com.utdallas.movierental.domain.models;
+package com.utdallas.movierental.domain.model;
 
-import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.domain.Item;
+import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.domain.type.ModelType;
-import com.utdallas.movierental.price.Price;
-import com.utdallas.movierental.price.PriceFactory;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.util.Date;
 
-//TODO Figure out better name
 public abstract class BaseItem implements Item {
 
     private String title;
     private CategoryType categoryType;
-    private Price price;
+    private ModelType modelType;
+    private BigDecimal price;
+    private Date availableDate;
 
     //TODO Figure better way to pass category and model types
-    public BaseItem(String title, CategoryType categoryType, ModelType modelType) {
+    public BaseItem(String title, CategoryType categoryType, ModelType modelType, double price) {
         this.title = title;
         this.categoryType = categoryType;
-        this.price = PriceFactory.getItemPriceFactory(categoryType, modelType).getPrice();
+        this.modelType = modelType;
+        this.price = BigDecimal.valueOf(price);
+        this.availableDate = new Date();
     }
 
     @Override
@@ -33,8 +36,18 @@ public abstract class BaseItem implements Item {
     }
 
     @Override
+    public Date getAvailableDate() {
+        return availableDate;
+    }
+
+    @Override
     public CategoryType getCategoryType() {
         return categoryType;
+    }
+
+    @Override
+    public ModelType getModelType() {
+        return modelType;
     }
 
     @Override
@@ -44,6 +57,10 @@ public abstract class BaseItem implements Item {
 
     @Override
     public BigDecimal getPrice() {
-        return price.getChargeAmount();
+        return price;
+    }
+
+    public void updatePrice(BigDecimal newPrice) {
+        this.price = newPrice;
     }
 }

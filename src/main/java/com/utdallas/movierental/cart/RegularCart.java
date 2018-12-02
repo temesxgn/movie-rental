@@ -4,10 +4,11 @@ import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.frequentcustomerpoints.FrequentCustomerPoints;
 import com.utdallas.movierental.frequentcustomerpoints.customer.FrequentCustomerPointsCustomerStrategyFactory;
-import com.utdallas.movierental.transaction.Order;
+import com.utdallas.movierental.customer.Order;
 import com.utdallas.movierental.util.NumberUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegularCart implements Cart {
@@ -49,7 +50,7 @@ public class RegularCart implements Cart {
 
     @Override
     public Order checkout() {
-        return new Order(customer.getCustomerId(), items, getTotalChargeAmount(), getTotalFrequentCustomerPoints());
+        return new Order(customer.getCustomerId(), new ArrayList<>(items), getTotalChargeAmount(), getTotalFrequentCustomerPoints());
     }
 
     @Override

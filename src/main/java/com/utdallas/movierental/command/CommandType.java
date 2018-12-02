@@ -1,6 +1,6 @@
 package com.utdallas.movierental.command;
 
-import com.utdallas.movierental.exception.InvalidInputTypeException;
+import com.utdallas.movierental.exception.InvalidCommandTypeException;
 
 public enum CommandType {
 
@@ -22,13 +22,13 @@ public enum CommandType {
         return code;
     }
 
-    public static CommandType findByCode(String code) throws InvalidInputTypeException {
-        for(CommandType v : values()){
-            if( v.getCode().equalsIgnoreCase(code)){
-                return v;
+    public static CommandType findByCode(String code) throws InvalidCommandTypeException {
+        for(CommandType c : values()){
+            if (c.getCode().equalsIgnoreCase(code)){
+                return c;
             }
         }
 
-        throw new InvalidInputTypeException();
+        throw new InvalidCommandTypeException();
     }
 }

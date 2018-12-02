@@ -1,7 +1,5 @@
 package com.utdallas.movierental.checkoutoption.purchase;
 
-import com.utdallas.movierental.checkoutoption.rental.Rental;
-import com.utdallas.movierental.checkoutoption.rental.RentalDecorator;
 import com.utdallas.movierental.util.NumberUtils;
 
 import java.math.BigDecimal;

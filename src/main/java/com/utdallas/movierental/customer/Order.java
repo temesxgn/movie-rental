@@ -1,10 +1,11 @@
-package com.utdallas.movierental.transaction;
+package com.utdallas.movierental.customer;
 
 import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.util.ApplicationUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Order {
 
@@ -36,7 +37,7 @@ public class Order {
     public String toString() {
         return String.format("%3s %5s %20s %25s %10.2f %25s %10s",
                 this.customerId, ApplicationUtil.PIPE,
-                this.items.stream().findAny().get().getTitle(),
+                this.items.stream().map(CheckoutOption::getTitle).collect(Collectors.joining(", ")),
                 ApplicationUtil.PIPE, this.totalChargeAmount, ApplicationUtil.PIPE, this.frequentCustomerPoints);
     }
 }

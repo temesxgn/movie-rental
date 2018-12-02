@@ -4,6 +4,7 @@ import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.checkoutoption.CheckoutOptionFactory;
 import com.utdallas.movierental.database.Entry;
 import com.utdallas.movierental.domain.ItemFactory;
+import com.utdallas.movierental.domain.RentableItem;
 import com.utdallas.movierental.service.DatabaseService;
 import com.utdallas.movierental.util.ApplicationUtil;
 
@@ -22,15 +23,15 @@ public class HandleRentItemEventCommand extends BaseCommand {
         ApplicationUtil.println("Select item number to rent");
         ApplicationUtil.print("Item number: ");
         int id = scanner.nextInt();
-        Entry entry = DatabaseService.findById(id);
-        if (!entry.isNull()) {
-            validateAvailability(entry);
-        } else {
-            ApplicationUtil.println("Item with id: " + id + " was not found");
-        }
+        DatabaseService.findById(id).ifPresent(entry -> {
+            if (entry.getItem() instanceof RentableItem) {
+                validateAvailability(entry);
+            } else {
+                ApplicationUtil.println("Item with id: " + entry.getId() + " is not purchasable");
+            }
+        });
     }
 
-    //TODO askUserForRentLengthAndAddToCart should not be here, update later
     private void validateAvailability(Entry entry) {
         if (!isSelectedQuantityAvailable(BigDecimal.ONE.intValue(), entry.getAvailableQuantity())) {
             ApplicationUtil.println(String.format("Error, there are only %s available.", entry.getAvailableQuantity()));
@@ -39,7 +40,6 @@ public class HandleRentItemEventCommand extends BaseCommand {
         }
     }
 
-    //TODO this can be extracted into multiple methods
     private void askUserForRentLengthAndAddToCart(Entry entry) {
         ApplicationUtil.print("How many days would you like to rent? Days: ");
         int rentLength = scanner.nextInt();
@@ -48,8 +48,4 @@ public class HandleRentItemEventCommand extends BaseCommand {
         DatabaseService.deductAvailabilityAmountForEntry(entry.getId(), BigDecimal.ONE.intValue());
     }
 
-    //TODO can be moved to shared area
-    private boolean isSelectedQuantityAvailable(final int selectedQuantity, final int availableQuantity) {
-        return selectedQuantity <= availableQuantity;
-    }
 }

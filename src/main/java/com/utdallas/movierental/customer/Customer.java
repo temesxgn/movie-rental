@@ -1,7 +1,5 @@
 package com.utdallas.movierental.customer;
 
-import com.utdallas.movierental.transaction.Order;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

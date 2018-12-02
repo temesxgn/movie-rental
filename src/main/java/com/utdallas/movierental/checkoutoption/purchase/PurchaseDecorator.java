@@ -1,6 +1,5 @@
 package com.utdallas.movierental.checkoutoption.purchase;
 
-import com.utdallas.movierental.checkoutoption.rental.Rental;
 import com.utdallas.movierental.domain.type.CategoryType;
 
 import java.math.BigDecimal;

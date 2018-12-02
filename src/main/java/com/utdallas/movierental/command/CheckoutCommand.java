@@ -4,30 +4,24 @@ import com.utdallas.movierental.cart.Cart;
 import com.utdallas.movierental.checkoutoption.CheckoutOption;
 import com.utdallas.movierental.checkoutoption.purchase.Purchase;
 import com.utdallas.movierental.checkoutoption.purchase.PurchaseDecoratorHalfOff;
-import com.utdallas.movierental.checkoutoption.rental.RegularRental;
 import com.utdallas.movierental.checkoutoption.rental.Rental;
 import com.utdallas.movierental.checkoutoption.rental.RentalDecoratorFreeRental;
 import com.utdallas.movierental.customer.Customer;
-import com.utdallas.movierental.domain.Item;
-import com.utdallas.movierental.domain.decorator.ItemDecoratorRentable;
-import com.utdallas.movierental.domain.models.Movie;
-import com.utdallas.movierental.domain.type.CategoryType;
 import com.utdallas.movierental.service.CheckoutService;
 import com.utdallas.movierental.util.ApplicationUtil;
 
 import java.util.Comparator;
-import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class CheckoutCommand extends BaseCommand {
 
     private static final int FREE_RENTAL_FCP_MINIMUM = 10;
     private static final int HALF_OFF_PURCHASE_FCP_MINIMUM = 20;
     private Cart cart;
+    private Customer customer;
 
-    public CheckoutCommand(Cart cart) {
+    public CheckoutCommand(Customer customer, Cart cart) {
         super();
+        this.customer = customer;
         this.cart = cart;
     }
 
@@ -35,11 +29,11 @@ public class CheckoutCommand extends BaseCommand {
     public void execute() {
         ApplicationUtil.println("Checking out...");
 
-        determineCustomerEligibility();
-        CheckoutService.checkout(cart);
+        determineCustomerDiscountEligibility();
+        CheckoutService.checkout(customer, cart);
     }
 
-    private void determineCustomerEligibility() {
+    private void determineCustomerDiscountEligibility() {
         Customer customer = cart.getCustomer();
 
         boolean isCustomerEligibleForFreeRental = customer.getFrequentCustomerPoints() >= FREE_RENTAL_FCP_MINIMUM
@@ -52,7 +46,6 @@ public class CheckoutCommand extends BaseCommand {
 
         if (isCustomerEligibleForFCPDiscount) {
             askUserForDiscountOption(isCustomerEligibleForFreeRental, isCustomerEligibleForHalfOffPurchase);
-
         }
     }
 
@@ -83,6 +76,7 @@ public class CheckoutCommand extends BaseCommand {
                 applyHalfOffPurchaseItem();
                 break;
             default:
+                ApplicationUtil.println("Invalid input, not applying any discounts");
                 break;
         }
     }
@@ -111,7 +105,5 @@ public class CheckoutCommand extends BaseCommand {
                 cart.addItem(halfOffRental);
                 cart.getCustomer().deductFrequentCustomerPoints(HALF_OFF_PURCHASE_FCP_MINIMUM);
             });
-
-
     }
 }

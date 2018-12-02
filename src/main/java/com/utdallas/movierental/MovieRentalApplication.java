@@ -9,7 +9,7 @@ import com.utdallas.movierental.command.CommandFactoryInput;
 import com.utdallas.movierental.command.CommandType;
 import com.utdallas.movierental.customer.Customer;
 import com.utdallas.movierental.customer.CustomerBuilder;
-import com.utdallas.movierental.exception.InvalidInputTypeException;
+import com.utdallas.movierental.exception.InvalidCommandTypeException;
 import com.utdallas.movierental.util.ApplicationUtil;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class MovieRentalApplication {
                 CommandType option = CommandType.findByCode(scanner.nextLine());
                 Command command = CommandFactory.getCommand(new CommandFactoryInput(option, customer, cart));
                 command.execute();
-            } catch (InvalidInputTypeException e) {
+            } catch (InvalidCommandTypeException e) {
                 ApplicationUtil.println("Invalid input! Please select from the options above.");
             }
         }

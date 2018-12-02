@@ -9,4 +9,8 @@ public abstract class BaseCommand implements Command {
     public BaseCommand() {
         scanner = new Scanner(System.in);
     }
+
+    protected boolean isSelectedQuantityAvailable(final int selectedQuantity, final int availableQuantity) {
+        return selectedQuantity <= availableQuantity;
+    }
 }

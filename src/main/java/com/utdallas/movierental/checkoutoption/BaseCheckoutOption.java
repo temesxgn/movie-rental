@@ -11,7 +11,7 @@ public abstract class BaseCheckoutOption implements CheckoutOption {
     protected Item item;
     protected FrequentCustomerPoints frequentRentalPointsStrategy;
 
-    public BaseCheckoutOption(String customerId, Item item, CheckoutOptionType type) {
+    public BaseCheckoutOption(String customerId, Item item) {
         this.customerId = customerId;
         this.item = item;
     }

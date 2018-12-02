@@ -5,6 +5,7 @@ import com.utdallas.movierental.util.ApplicationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,6 +34,14 @@ public class Database {
         });
     }
 
+    public Optional<Entry> findById(int id) {
+        return availableItems.stream().filter(entry -> entry.getId() == id).findFirst();
+    }
+
+    public Optional<Entry> findByTitle(String title) {
+        return availableItems.stream().filter(entry -> entry.getItem().getTitle().equals(title)).findFirst();
+    }
+
     public void printAvailableItems() {
         printHeader();
         getAvailableItems().forEach(entry -> ApplicationUtil.println(entry.toString()));
@@ -43,19 +52,18 @@ public class Database {
         ApplicationUtil.println(String.format("%s", ApplicationUtil.HEADER));
     }
 
-    public Entry findById(int id) {
-        return availableItems.stream().filter(entry -> entry.getId() == id).findFirst().orElse(new NullEntry());
-    }
-
     public void deductAvailabilityAmount(int id, int selectedQuantity) {
-        Entry entry = findById(id);
-        int avail = entry.getAvailableQuantity() - selectedQuantity;
-        entry.setAvailableQuantity(avail);
+        findById(id).ifPresent(entry -> {
+            int avail = entry.getAvailableQuantity() - selectedQuantity;
+            entry.setAvailableQuantity(avail);
+        });
+
     }
 
     public void addAvailabilityAmount(int id, int selectedQuantity) {
-        Entry entry = findById(id);
-        int avail = entry.getAvailableQuantity() + selectedQuantity;
-        entry.setAvailableQuantity(avail);
+        findById(id).ifPresent(entry -> {
+            int avail = entry.getAvailableQuantity() + selectedQuantity;
+            entry.setAvailableQuantity(avail);
+        });
     }
 }

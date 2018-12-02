@@ -10,6 +10,6 @@ public class DisplayItemsCommand implements Command {
 
     @Override
     public void execute() {
-        DatabaseService.printAvailableItems(); //TODO maybe move printing to another class?
+        DatabaseService.printAvailableItems();
     }
 }

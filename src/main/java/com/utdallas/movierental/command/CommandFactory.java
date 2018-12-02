@@ -1,10 +1,10 @@
 package com.utdallas.movierental.command;
 
-import com.utdallas.movierental.exception.InvalidInputTypeException;
+import com.utdallas.movierental.exception.InvalidCommandTypeException;
 
 public final class CommandFactory {
 
-    public static Command getCommand(CommandFactoryInput data) throws InvalidInputTypeException {
+    public static Command getCommand(CommandFactoryInput data) throws InvalidCommandTypeException {
 
         Command command;
         switch (data.getCommandType()) {
@@ -18,7 +18,7 @@ public final class CommandFactory {
                 command = new HandleRentItemEventCommand(data.getCart());
                 break;
             case CHECKOUT:
-                command = new CheckoutCommand(data.getCart());
+                command = new CheckoutCommand(data.getCustomer(), data.getCart());
                 break;
             case EMPTY_CART:
                 command = new EmptyCartCommand(data.getCart());
@@ -33,7 +33,7 @@ public final class CommandFactory {
                 command = new DisplayItemsCommand();
                 break;
             default:
-                throw new InvalidInputTypeException();
+                throw new InvalidCommandTypeException();
         }
 
         return command;
